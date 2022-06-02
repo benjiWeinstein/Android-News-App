@@ -1,5 +1,6 @@
 package com.example.afinal.utils
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
@@ -17,6 +18,7 @@ fun <T,A> performFetchingAndSaving(localDbFetch: () -> LiveData<T>,
         emitSource(source)
 
         val fetchResource = remoteDbFetch()
+//        Log.d("Retro", fetchResource.toString())
 
         if(fetchResource.status is Success)
             localDbSave(fetchResource.status.data!!)

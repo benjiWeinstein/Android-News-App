@@ -1,35 +1,63 @@
 package com.example.afinal.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.afinal.R
+import com.example.afinal.databinding.FragmentHomeBinding
+import com.example.afinal.utils.Loading
+import com.example.afinal.utils.Success
+import com.example.afinal.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Home.newInstance] factory method to
- * create an instance of this fragment.
- */
 
 @AndroidEntryPoint
 class Home : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private val viewModel : homeViewModel by viewModels()
+//    lateinit var binding : FragmentHomeBinding
+    private var binding : FragmentHomeBinding by autoCleared()
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        viewModel.city.observe(viewLifecycleOwner) {
+//            when(it.status) {
+//                is Loading -> {}
+//
+//                is Success -> {
+//                    Toast.makeText(requireContext(), it.status.data.toString(), Toast.LENGTH_SHORT).show()
+//                }
+//                is Error -> {
+//
+//                }
+//            }
+//        }
+//    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        viewModel.articles.observe(viewLifecycleOwner) {
+            when(it.status) {
+                is Loading -> {
+                Toast.makeText(requireContext(),"loading",Toast.LENGTH_LONG).show()
+                }
+                is Success -> {
+                    binding.textView.text = it.status.data.toString()
+                    Toast.makeText(requireContext(), "succes " +it.status.data.toString(), Toast.LENGTH_SHORT).show()
+                }
+
+                is Error -> {
+                    Log.d("when", it.status.message.toString())
+                    Toast.makeText(requireContext(),"error",Toast.LENGTH_LONG).show()
+                }
+            }
         }
     }
 
@@ -37,27 +65,9 @@ class Home : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        binding = FragmentHomeBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Home.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Home().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+
 }

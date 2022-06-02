@@ -2,7 +2,7 @@ package com.example.afinal.di
 
 import android.content.Context
 import com.example.afinal.data.local_db.AppDatabase
-import com.example.afinal.data.remote_db.WeatherService
+import com.example.afinal.data.remote_db.NewsService
 import com.example.afinal.utils.Constants
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -26,13 +26,14 @@ object AppModule {
     @Provides
     @Singleton
     fun provideRetrofit(gson : Gson) : Retrofit {
+
         return Retrofit.Builder().baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson)).build()
     }
 
     @Provides
-    fun provideCharacterService(retrofit: Retrofit) : WeatherService =
-        retrofit.create(WeatherService::class.java)
+    fun provideCharacterService(retrofit: Retrofit) : NewsService =
+        retrofit.create(NewsService::class.java)
 
 
 
@@ -43,7 +44,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideCityDao(database: AppDatabase) = database.cityDao()
+    fun provideCityDao(database: AppDatabase) = database.articleDao()
 
 
 

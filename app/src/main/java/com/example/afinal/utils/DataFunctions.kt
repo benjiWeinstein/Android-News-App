@@ -18,7 +18,7 @@ fun <T,A> performFetchingAndSaving(localDbFetch: () -> LiveData<T>,
         emitSource(source)
 
         val fetchResource = remoteDbFetch()
-//        Log.d("Retro", fetchResource.toString())
+        Log.d("Retro", fetchResource.toString())
 
         if(fetchResource.status is Success)
             localDbSave(fetchResource.status.data!!)

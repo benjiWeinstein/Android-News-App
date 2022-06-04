@@ -15,7 +15,10 @@ abstract class BaseDataSource {
         try {
             Log.d("Retro", "Entered")
             val result  = call()
+            Log.d("Retro", result.toString())
+
             if(result.isSuccessful) {
+//                result.
                 val body = result.body()
                 if(body != null) {
                     Log.d("Retro API", body.toString())

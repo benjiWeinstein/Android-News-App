@@ -10,6 +10,8 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.afinal.R
+import com.example.afinal.data.models.Article
+import com.example.afinal.data.models.Source
 import com.example.afinal.databinding.FragmentHomeBinding
 import com.example.afinal.utils.Loading
 import com.example.afinal.utils.Success
@@ -17,30 +19,18 @@ import com.example.afinal.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 
 
-
 @AndroidEntryPoint
-class Home : Fragment() {
+class Home : Fragment(), HomeAdapter.ArticleItemListener {
     private val viewModel : homeViewModel by viewModels()
-//    lateinit var binding : FragmentHomeBinding
     private var binding : FragmentHomeBinding by autoCleared()
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        viewModel.city.observe(viewLifecycleOwner) {
-//            when(it.status) {
-//                is Loading -> {}
-//
-//                is Success -> {
-//                    Toast.makeText(requireContext(), it.status.data.toString(), Toast.LENGTH_SHORT).show()
-//                }
-//                is Error -> {
-//
-//                }
-//            }
-//        }
-//    }
+    private  lateinit var  adapter: HomeAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        adapter = HomeAdapter(this)
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView.adapter = adapter
 
 
         viewModel.articles.observe(viewLifecycleOwner) {
@@ -49,7 +39,10 @@ class Home : Fragment() {
                 Toast.makeText(requireContext(),"loading",Toast.LENGTH_LONG).show()
                 }
                 is Success -> {
-                    binding.textView.text = it.status.data.toString()
+//                    binding.textView.text = it.status.data.toString()
+                    adapter.setArticles(it.status.data!!)
+//                    adapter.setArticles(listOf(Article(id=1,source = Source("hi","bbc"))))
+
                     Toast.makeText(requireContext(), "succes " +it.status.data.toString(), Toast.LENGTH_SHORT).show()
                 }
 
@@ -67,6 +60,10 @@ class Home : Fragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater,container,false)
         return binding.root
+    }
+
+    override fun onArticleClick(characterId: Int) {
+        TODO("Not yet implemented")
     }
 
 

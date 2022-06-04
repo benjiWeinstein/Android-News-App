@@ -36,19 +36,12 @@ class Home : Fragment(), HomeAdapter.ArticleItemListener {
         viewModel.articles.observe(viewLifecycleOwner) {
             when(it.status) {
                 is Loading -> {
-                Toast.makeText(requireContext(),"loading",Toast.LENGTH_LONG).show()
                 }
                 is Success -> {
-//                    binding.textView.text = it.status.data.toString()
                     adapter.setArticles(it.status.data!!)
-//                    adapter.setArticles(listOf(Article(id=1,source = Source("hi","bbc"))))
-
-                    Toast.makeText(requireContext(), "succes " +it.status.data.toString(), Toast.LENGTH_SHORT).show()
                 }
 
                 is Error -> {
-                    Log.d("when", it.status.message.toString())
-                    Toast.makeText(requireContext(),"error",Toast.LENGTH_LONG).show()
                 }
             }
         }

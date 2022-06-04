@@ -8,5 +8,32 @@
         android:id="@+id/home2"
         android:name="com.example.afinal.ui.home.Home"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home2_to_viewArticle"
+            app:destination="@id/viewArticle" />
+    </fragment>
+    <fragment
+        android:id="@+id/favorites"
+        android:name="com.example.afinal.ui.favorites.favorites"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favorites_to_viewArticle"
+            app:destination="@id/viewArticle" />
+    </fragment>
+    <fragment
+        android:id="@+id/search"
+        android:name="com.example.afinal.ui.search.search"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_search_to_viewArticle"
+            app:destination="@id/viewArticle" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewArticle"
+        android:name="com.example.afinal.ViewArticle"
+        android:label="fragment_view_article"
+        tools:layout="@layout/fragment_view_article" />
 </navigation>

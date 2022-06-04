@@ -25,7 +25,7 @@ class ArticleRepository @Inject constructor(
     )
 
     fun searchForNews(q : String, page: Int) = performFetchingAndSaving(
-        {localDataSource.getAllArticles()},
+        {localDataSource.getSearchArticles(q)},
         {remoteDataSource.searchForNews(q, page)},
         {localDataSource.insertArticles(it.articles)}
     )

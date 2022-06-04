@@ -16,6 +16,9 @@ interface ArticleDao {
     @Query("SELECT * FROM articles")
     fun getAllArticles(): LiveData<List<Article>>
 
+    @Query("SELECT DISTINCT * FROM articles WHERE title LIKE '%' || :search || '%' ")
+    fun getSearchArticles(search : String): LiveData<List<Article>>
+
     @Delete
     suspend fun deleteArticle(article: Article)
 }

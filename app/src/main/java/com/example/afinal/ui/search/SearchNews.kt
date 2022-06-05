@@ -49,7 +49,7 @@ class SearchNews : Fragment() {
     }
 
     private fun validateInput(input: String) : Boolean{
-        return true
+        return input.isNotEmpty()
     }
 
 }

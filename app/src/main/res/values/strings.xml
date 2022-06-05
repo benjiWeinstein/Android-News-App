@@ -1,9 +1,14 @@
 <resources>
-    <string name="app_name">Final</string>
+    <string name="app_name">News</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="searchMe">
         Search for News \n \n Examples: ""Apple"", "Tesla", "Africa", "Health"
-
+    </string>
+    <string name="noFavorites">
+        You have no saved news articles
+    </string>
+    <string name="noResults">
+        No results found
     </string>
 </resources>

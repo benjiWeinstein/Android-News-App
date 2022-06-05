@@ -40,7 +40,7 @@ object AppModule {
 
         return Retrofit.Builder().baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
-//            .client(client)
+            .client(client)
             .build()
     }
 

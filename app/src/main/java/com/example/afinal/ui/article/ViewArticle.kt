@@ -24,13 +24,12 @@ class ViewArticle : Fragment() {
     lateinit var article: Article
     var isFav: Boolean = false
 
-
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         article = arguments?.getSerializable("article") as Article
+        Log.d("sh0",article.toString())
         isFav = arguments?.getBoolean("isFav") as Boolean
+
 
         if (isFav) {
             binding.fav.visibility = View.INVISIBLE
@@ -39,7 +38,9 @@ class ViewArticle : Fragment() {
         binding.webView.apply {
             webViewClient = WebViewClient()
             loadUrl(article.url!!)
+
         }
+
         binding.fav.setOnClickListener{
             viewModel.saveArticleAsFavorite(article)
             Toast.makeText(requireContext(), "Saved to Favorites", Toast.LENGTH_SHORT).show()

@@ -47,6 +47,15 @@ class favoritesAdapter(private val listener : ArticleItemListener) :
         notifyDataSetChanged()
     }
 
+    fun removeArticle(pos : Int){
+        this.articles.removeAt(pos)
+        notifyDataSetChanged()
+    }
+    fun getArticle(pos : Int) : Article{
+        return this.articles[pos]
+
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
         val binding = FragmentArticleBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ArticleViewHolder(binding,listener)

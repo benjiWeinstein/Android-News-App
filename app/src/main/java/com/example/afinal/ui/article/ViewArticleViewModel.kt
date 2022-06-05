@@ -1,4 +1,4 @@
-package com.example.afinal.ui.favorites
+package com.example.afinal.ui.article
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -10,12 +10,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class favoritesViewModel @Inject constructor(val articleRepository: ArticleRepository) : ViewModel() {
+class ViewArticleViewModel @Inject constructor(private val articleRepository: ArticleRepository) : ViewModel()  {
 
-
-    val favorites = articleRepository.getSavedNews()
-
-    fun deleteArticle(article: Article) = viewModelScope.launch {
-        articleRepository.deleteArticle(article)
+    fun saveArticleAsFavorite(article: Article) = viewModelScope.launch {
+        article.isFavorite = true
+        articleRepository.upsert(article)
     }
+
 }

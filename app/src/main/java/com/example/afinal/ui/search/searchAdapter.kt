@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.afinal.R
 import com.example.afinal.data.models.Article
 import com.example.afinal.databinding.FragmentArticleBinding
 
@@ -32,17 +33,17 @@ class searchAdapter(private val listener : ArticleItemListener) :
             Glide.with(itemBinding.root)
                 .load(item.urlToImage)
                 .circleCrop()
+                .placeholder(R.drawable.waiting)
                 .into(itemBinding.image)
         }
 
         override fun onClick(v: View?) {
-            listener.onArticleClick(article.id)
+            listener.onArticleClick(article)
         }
     }
 
     fun setArticles(article : Collection<Article>) {
         this.articles.clear()
-        Log.d("apples", article.toString())
         this.articles.addAll(article.distinctBy { article -> article.title })
         notifyDataSetChanged()
     }
@@ -59,6 +60,6 @@ class searchAdapter(private val listener : ArticleItemListener) :
     override fun getItemCount() = articles.size
 
     interface ArticleItemListener {
-        fun onArticleClick(characterId : Int)
+        fun onArticleClick(article : Article)
     }
 }

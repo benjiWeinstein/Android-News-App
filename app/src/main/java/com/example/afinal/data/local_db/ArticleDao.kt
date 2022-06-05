@@ -13,7 +13,7 @@ interface ArticleDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertArticles(articles : List<Article>)
 
-    @Query("SELECT * FROM articles")
+    @Query("SELECT * FROM articles ORDER BY id DESC")
     fun getAllArticles(): LiveData<List<Article>>
 
     @Query("SELECT DISTINCT * FROM articles WHERE title LIKE '%' || :search || '%' ")
@@ -21,4 +21,7 @@ interface ArticleDao {
 
     @Delete
     suspend fun deleteArticle(article: Article)
+
+    @Query("SELECT * FROM articles WHERE isFavorite = 1")
+    fun getAllFavorites(): LiveData<List<Article>>
 }

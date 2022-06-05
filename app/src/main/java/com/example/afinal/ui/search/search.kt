@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.afinal.R
+import com.example.afinal.data.models.Article
 import com.example.afinal.databinding.FragmentHomeBinding
 import com.example.afinal.databinding.FragmentSearchBinding
 import com.example.afinal.ui.home.HomeAdapter
@@ -53,6 +55,11 @@ class search : Fragment(), searchAdapter.ArticleItemListener {
                 }
             }
         }
+
+        binding.searchBtn.setOnClickListener{
+            findNavController().navigate(R.id.action_search_to_searchNews)
+        }
+
     }
 
 
@@ -64,8 +71,11 @@ class search : Fragment(), searchAdapter.ArticleItemListener {
         return binding.root
     }
 
-    override fun onArticleClick(characterId: Int) {
-        TODO("Not yet implemented")
+    override fun onArticleClick(article: Article) {
+        val bundle = Bundle().apply {
+            putSerializable("article", article)
+        }
+        findNavController().navigate(R.id.action_search_to_viewArticle, bundle)
     }
 
 

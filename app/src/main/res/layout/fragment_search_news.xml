@@ -9,12 +9,13 @@
         android:id="@+id/etSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:hint="Search..."
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:inputType="text" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -32,10 +33,20 @@
             android:id="@+id/searchBtn"
             android:layout_width="137dp"
             android:layout_height="48dp"
-            android:layout_marginBottom="644dp"
+            android:layout_gravity="center_horizontal"
             android:contentDescription="Search"
             android:drawableTop="@drawable/search"
             android:gravity="center_horizontal" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/searchMe"
+            android:textAlignment="center" />
     </LinearLayout>
 
 

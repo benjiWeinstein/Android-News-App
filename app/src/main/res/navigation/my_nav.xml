@@ -30,12 +30,19 @@
         <action
             android:id="@+id/action_search_to_viewArticle"
             app:destination="@id/viewArticle" />
+        <action
+            android:id="@+id/action_search_to_searchNews"
+            app:destination="@id/searchNews" />
     </fragment>
     <fragment
         android:id="@+id/viewArticle"
-        android:name="com.example.afinal.ViewArticle"
+        android:name="com.example.afinal.ui.article.ViewArticle"
         android:label="fragment_view_article"
-        tools:layout="@layout/fragment_view_article" />
+        tools:layout="@layout/fragment_view_article" >
+        <argument
+            android:name="article"
+            app:argType="com.example.afinal.data.models.Article" />
+    </fragment>
     <fragment
         android:id="@+id/searchNews"
         android:name="com.example.afinal.ui.search.SearchNews"

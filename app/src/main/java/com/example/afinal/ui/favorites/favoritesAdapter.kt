@@ -1,22 +1,22 @@
-package com.example.afinal.ui.home
+package com.example.afinal.ui.favorites
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.example.afinal.R
 import com.example.afinal.data.models.Article
 import com.example.afinal.databinding.FragmentArticleBinding
+import com.example.afinal.databinding.FragmentFavoritesBinding
 
-class HomeAdapter(private val listener : ArticleItemListener) :
-    RecyclerView.Adapter<HomeAdapter.ArticleViewHolder>() {
+class favoritesAdapter(private val listener : ArticleItemListener) :
+    RecyclerView.Adapter<favoritesAdapter.ArticleViewHolder>() {
 
     private val articles = ArrayList<Article>()
 
     class ArticleViewHolder(private val itemBinding: FragmentArticleBinding,
-                              private val listener: ArticleItemListener)
+                            private val listener: ArticleItemListener)
         : RecyclerView.ViewHolder(itemBinding.root),
         View.OnClickListener {
 

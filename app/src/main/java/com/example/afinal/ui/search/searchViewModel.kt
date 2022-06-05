@@ -11,12 +11,21 @@ import javax.inject.Inject
 
 @HiltViewModel
 class searchViewModel @Inject constructor(val articleRepository: ArticleRepository) : ViewModel() {
-     var searchArticles: MutableLiveData<Resource<List<Article>>> = MutableLiveData<Resource<List<Article>>>()
-//
-//    val searchArticles = articleRepository.searchForNews("apple",1)
-    fun searchNews(searchQuery: String) =
-        run { searchArticles =
-            this.articleRepository.searchForNews(searchQuery,1) as MutableLiveData<Resource<List<Article>>>
-        }
+//     var searchArticles =  MutableLiveData<Resource<List<Article>>>()
+////
+////    val searchArticles = articleRepository.searchForNews("apple",1)
+//    fun searchNews(searchQuery: String) =
+//        run { searchArticles.value =
+//            articleRepository.searchForNews(searchQuery,1)
+//        }
+
+//    var query = MutableLiveData<String>()
+
+    lateinit var articles :  LiveData<Resource<List<Article>>>
+    fun searchNews(query: String)  {
+        articles = articleRepository.searchForNews(query.toString(), 1)
+    }
+
+
 
 }

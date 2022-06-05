@@ -36,4 +36,13 @@
         android:name="com.example.afinal.ViewArticle"
         android:label="fragment_view_article"
         tools:layout="@layout/fragment_view_article" />
+    <fragment
+        android:id="@+id/searchNews"
+        android:name="com.example.afinal.ui.search.SearchNews"
+        android:label="SearchNews" >
+        <action
+            android:id="@+id/action_searchNews_to_search"
+            app:destination="@id/search"
+            />
+    </fragment>
 </navigation>

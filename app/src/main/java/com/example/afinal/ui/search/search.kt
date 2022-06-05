@@ -19,16 +19,15 @@ import com.example.afinal.utils.Loading
 import com.example.afinal.utils.Success
 import com.example.afinal.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 @AndroidEntryPoint
 class search : Fragment(), searchAdapter.ArticleItemListener {
     private val viewModel : searchViewModel by viewModels()
     private var binding : FragmentSearchBinding by autoCleared()
     private  lateinit var  adapter: searchAdapter
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,23 +36,12 @@ class search : Fragment(), searchAdapter.ArticleItemListener {
         binding.rvSearchNews.layoutManager = LinearLayoutManager(requireContext())
         binding.rvSearchNews.adapter = adapter
 
-        viewModel.searchNews("Canada")
+        val query = arguments?.get("query").toString()
 
 
-        var job: Job? = null
-        binding.etSearch.addTextChangedListener { editable ->
-            job?.cancel()
-            job = MainScope().launch {
-                delay(500L)
-                editable?.let {
-                    if(editable.toString().isNotEmpty()) {
-                        viewModel.searchNews(editable.toString())
-                    }
-                }
-            }
-        }
+        viewModel.searchNews(query)
 
-        viewModel.searchArticles.observe(viewLifecycleOwner) {
+        viewModel.articles.observe(viewLifecycleOwner) {
             when(it.status) {
                 is Loading -> {
                 }
@@ -66,6 +54,7 @@ class search : Fragment(), searchAdapter.ArticleItemListener {
             }
         }
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
